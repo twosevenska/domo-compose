@@ -1,6 +1,6 @@
-# Usenet Docker
+# Domo-compose
 
-This repo is my version of another fork. Setup should be a bit easier but even the original was pretty straightforward.
+![domo_logo](/domo_logo.jpg)
 
 ## Containers
 * [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) - Nginx Proxy
