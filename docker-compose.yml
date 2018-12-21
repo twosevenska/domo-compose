@@ -70,7 +70,7 @@ services:
             - VIRTUAL_PORT=32400
             - ADVERTISE_IP=http://plex.${HOSTNAME}/
         hostname: PlexServer
-        mem_limit: 8gb
+        mem_limit: 16gb
         restart: always
 
     sonarr:
