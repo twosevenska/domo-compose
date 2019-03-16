@@ -3,8 +3,8 @@ SHELL := /bin/bash
 USENET_FILE = docker-compose.yml
 DISCORD_FILE = docker-compose-jmusicbot.yml
 
-.PHONY: clean usenet
-usenet:
+.PHONY: usenet
+usenet: clean-docker
 	docker-compose -f $(USENET_FILE) pull
 	docker-compose -f $(USENET_FILE) kill
 	docker-compose -f $(USENET_FILE) up -d
