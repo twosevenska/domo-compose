@@ -89,6 +89,26 @@ services:
         mem_limit: 16gb
         restart: always
 
+    Jellyfin:
+        image: jellyfin/jellyfin
+        container_name: jellyfin
+        volumes:
+            - ${DATA}/config/jellyfin:/config
+            - ${DATA}/appdata/jellyfin/cache:/cache
+            - ${DATA}/TV:/media/tvshows
+            - ${DATA}/Movies:/media/movies
+            - ${DATA}/Anime:/media/anime
+            - /dev/rtc:/dev/rtc:ro
+        ports:
+            - 8097:8096
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=jelly.${HOSTNAME}
+            - VIRTUAL_PORT=8097
+        hostname: Jellyfin
+        mem_limit: 16gb
+        restart: always
+
     sonarr:
         image: linuxserver/sonarr
         container_name: sonarr

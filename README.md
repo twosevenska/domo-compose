@@ -9,6 +9,8 @@
 * [plexinc/pms-docker](https://github.com/plexinc/pms-docker) - Plex
 * [linuxserver/sonarr](https://github.com/linuxserver/docker-sonarr) - Sonarr
 * [linuxserver/muximux](https://github.com/linuxserver/docker-muximux) - Muximux
+* [jellyfin/jellyfin](https://hub.docker.com/r/jellyfin/jellyfin) - Jellyfin - Testing as an alternative to Plex
+* [linuxserver/radarr](https://hub.docker.com/r/linuxserver/radarr) - Radarr - Testing as an alternative to Couchpotato
 * JMusicbot (built from this repo for now)
 
 ## Docker Setup
