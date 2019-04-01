@@ -139,29 +139,3 @@ services:
         mem_limit: 128m
         restart: always
 
-#    nextcloud:
-#        image: linuxserver/nextcloud
-#        container_name: nextcloud
-#        volumes:
-#            - ${DATA}/config/nextcloud:/config
-#            - ${DATA}/fileServer/data:/data
-#            - /etc/localtime:/etc/localtime:ro
-#        ports:
-#            - 443:443
-#        env_file: uidgid.env
-#        environment:
-#            - VIRTUAL_HOST=wurzcloud.${HOSTNAME}
-#            - VIRTUAL_PORT=443
-#        restart: always
-#
-#    mariadb:
-#        image: linuxserver/mariadb
-#        container_name: mariadb
-#        volumes:
-#            - ${DATA}/config/mariadb:/config
-#            - /etc/localtime:/etc/localtime:ro
-#        ports:
-#            - 3306:3306
-#        env_file: uidgid.env
-#        restart: always
-#
