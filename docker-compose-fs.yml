@@ -1,0 +1,16 @@
+version: '2'
+services:
+    perkeep:
+        image: jhillyerd/perkeep:stable
+        container_name: perkeep
+        volumes:
+            - ${DATA}/config/perkeep:/config
+            - ${DATA}/fileServer/data:/storage
+        ports:
+            - 3179:3179
+        environment:
+            - VIRTUAL_HOST=storage.${HOSTNAME}
+            - VIRTUAL_PORT=3179
+        mem_limit: 1gb
+        restart: always
+        entrypoint: /bin/sh

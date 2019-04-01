@@ -2,6 +2,7 @@ SHELL := /bin/bash
 
 USENET_FILE = docker-compose.yml
 DISCORD_FILE = docker-compose-jmusicbot.yml
+FS_FILE = docker-compose-fs.yml
 
 .PHONY: usenet
 usenet: clean-docker
@@ -13,6 +14,11 @@ usenet: clean-docker
 discord:
 	docker-compose -f $(DISCORD_FILE) kill
 	docker-compose -f $(DISCORD_FILE) up -d
+
+.PHONY: fs
+fs:
+	docker-compose -f $(FS_FILE) kill
+	docker-compose -f $(FS_FILE) up -d
 
 .PHONY: clean-docker
 clean-docker:
