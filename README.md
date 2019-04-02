@@ -12,6 +12,7 @@
 * [jellyfin/jellyfin](https://hub.docker.com/r/jellyfin/jellyfin) - Jellyfin - Testing as an alternative to Plex
 * [linuxserver/radarr](https://hub.docker.com/r/linuxserver/radarr) - Radarr - Testing as an alternative to Couchpotato
 * JMusicbot (built from this repo for now)
+* [silverwind/droppy](https://github.com/silverwind/droppy) - Droppy
 
 ## Docker Setup
 1. Update `./uidgid.env` with the user and group IDs that will be running Docker
