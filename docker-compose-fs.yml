@@ -1,16 +1,16 @@
 version: '2'
 services:
-    perkeep:
-        image: jhillyerd/perkeep:stable
-        container_name: perkeep
+    droppy:
+        image: silverwind/droppy
+        container_name: droppy
         volumes:
-            - ${DATA}/config/perkeep:/config
-            - ${DATA}/fileServer/data:/storage
+            - ${DATA}/config/droppy:/config
+            - ${DATA}/fileServer/data:/files
+        env_file: uidgid.env
         ports:
-            - 3179:3179
+            - 8900:8989
         environment:
             - VIRTUAL_HOST=storage.${HOSTNAME}
-            - VIRTUAL_PORT=3179
+            - VIRTUAL_PORT=8900
         mem_limit: 1gb
         restart: always
-        entrypoint: /bin/sh

@@ -1,7 +1,7 @@
 version: '2'
 services:
     nginx-proxy:
-        image: jwilder/nginx-proxy:latest
+        image: twosevenska/nginx-proxy:latest
         container_name: nginx-proxy
         volumes:
             - /var/run/docker.sock:/tmp/docker.sock:ro
