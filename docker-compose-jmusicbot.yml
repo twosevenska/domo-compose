@@ -1,7 +1,7 @@
 version: '2'
 services:
     jmusicbot:
-        image: jmusicbot
+        image: twosevenska/jmusicbot:dev
         container_name: jmusicbot
         volumes:
             - ${DATA}/config/jmusicbot/config.txt:/bot/config.txt
