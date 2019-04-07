@@ -3,7 +3,7 @@
 ![domo_logo](/domo_logo.jpg)
 
 ## Containers
-* [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) - Nginx Proxy
+* [twosevenska/nginx-proxy](https://cloud.docker.com/u/twosevenska/repository/docker/twosevenska/nginx-proxy) - Nginx Proxy
 * [linuxserver/sabnzbd](https://github.com/linuxserver/docker-sabnzbd) - SABnzbd
 * [linuxserver/couchpotato](https://github.com/linuxserver/docker-couchpotato) - CouchPotato
 * [plexinc/pms-docker](https://github.com/plexinc/pms-docker) - Plex
@@ -11,7 +11,7 @@
 * [linuxserver/muximux](https://github.com/linuxserver/docker-muximux) - Muximux
 * [jellyfin/jellyfin](https://hub.docker.com/r/jellyfin/jellyfin) - Jellyfin - Testing as an alternative to Plex
 * [linuxserver/radarr](https://hub.docker.com/r/linuxserver/radarr) - Radarr - Testing as an alternative to Couchpotato
-* JMusicbot (built from this repo for now)
+* [twosevenska/jmusicbot](https://cloud.docker.com/u/twosevenska/repository/docker/twosevenska/jmusicbot)JMusicbot
 * [silverwind/droppy](https://github.com/silverwind/droppy) - Droppy
 
 ## Docker Setup
