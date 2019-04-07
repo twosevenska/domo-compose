@@ -1,22 +1,41 @@
 SHELL := /bin/bash
 
-USENET_FILE = docker-compose.yml
+CORE_FILE = docker-compose.yml
+MEDIA_FILE = docker-compose-media.yml
 DISCORD_FILE = docker-compose-jmusicbot.yml
 FS_FILE = docker-compose-fs.yml
 
-.PHONY: usenet
-usenet: clean-docker
-	docker-compose -f $(USENET_FILE) pull
-	docker-compose -f $(USENET_FILE) kill
-	docker-compose -f $(USENET_FILE) up -d
+.PHONY: all
+all: core media discord fs
+
+.PHONY: kill-all
+kill-all:
+	docker-compose -f $(CORE_FILE) kill
+	docker-compose -f $(MEDIA_FILE) kill
+	docker-compose -f $(DISCORD_FILE) kill
+	docker-compose -f $(FS_FILE) kill
+
+.PHONY: core
+core: clean-docker
+	docker-compose -f $(CORE_FILE) pull
+	docker-compose -f $(CORE_FILE) kill
+	docker-compose -f $(CORE_FILE) up -d
+
+.PHONY: media
+media: clean-docker
+	docker-compose -f $(MEDIA_FILE) pull
+	docker-compose -f $(MEDIA_FILE) kill
+	docker-compose -f $(MEDIA_FILE) up -d
 
 .PHONY: discord
-discord:
+discord: clean-docker
+	docker-compose -f $(DISCORD_FILE) pull
 	docker-compose -f $(DISCORD_FILE) kill
 	docker-compose -f $(DISCORD_FILE) up -d
 
 .PHONY: fs
-fs:
+fs: clean-docker
+	docker-compose -f $(FS_FILE) pull
 	docker-compose -f $(FS_FILE) kill
 	docker-compose -f $(FS_FILE) up -d
 

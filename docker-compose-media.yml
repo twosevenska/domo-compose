@@ -1,0 +1,105 @@
+version: '2'
+services:
+    sabnzbd:
+        image: linuxserver/sabnzbd:latest
+        container_name: sabnzbd
+        volumes:
+            - ${DATA}/config/sabnzbd:/config
+            - ${DATA}/Downloads/complete:/downloads
+            - ${DATA}/Downloads/incomplete:/incomplete-downloads
+        ports:
+            - 8080:8080
+        env_file: uidgid.env
+        environment:
+            - EDGE=1
+            - VIRTUAL_HOST=sabnzbd.${HOSTNAME}
+            - VIRTUAL_PORT=8080
+        mem_limit: 2gb
+        restart: always
+
+    radarr:
+        image: linuxserver/radarr:latest
+        container_name: radarr
+        volumes:
+            - ${DATA}/config/radarr:/config
+            - ${DATA}/Downloads/complete:/downloads
+            - ${DATA}/Movies:/movies
+        ports:
+            - 7878:7878
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=radarr.${HOSTNAME}
+            - VIRTUAL_PORT=7878
+        mem_limit: 1gb
+        restart: always    
+
+    plex:
+        image: plexinc/pms-docker
+        container_name: plex
+        volumes:
+            - ${DATA}/config/plex:/config
+            - ${DATA}/appdata/plex/transcodes
+            - ${DATA}/TV:/data/tvshows
+            - ${DATA}/Movies:/data/movies
+            - ${DATA}/Anime:/data/anime
+        ports:
+            - 32469:32469
+            - 32400:32400/tcp
+            - 32401:32401
+            - 3005:3005/tcp
+            - 8324:8324/tcp
+            - 1900:1900/udp
+            - 32410:32410/udp
+            - 32412:32412/udp
+            - 32413:32413/udp
+            - 32414:32414/udp
+        env_file: uidgid.env
+        environment:
+            - TZ=Europe/London
+            - VIRTUAL_HOST=plex.${HOSTNAME}
+            - VIRTUAL_PORT=32400
+            - ADVERTISE_IP=http://plex.${HOSTNAME}/
+        hostname: PlexServer
+        mem_limit: 16gb
+        restart: always
+
+    emby:
+        image: emby/embyserver
+        container_name: emby
+        volumes:
+            - ${DATA}/config/emby:/config
+            - ${DATA}/TV:/data/tvshows:ro
+            - ${DATA}/Movies:/data/movies:ro
+            - ${DATA}/Anime:/data/anime:ro
+            - /dev/rtc:/dev/rtc:ro
+        ports:
+            - 1900:1900
+            - 7359:7359
+            - 8096:8096
+            - 8920:8920
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=emby.${HOSTNAME}
+            - VIRTUAL_PORT=8096
+        hostname: Emby
+        mem_limit: 16gb
+        restart: always
+
+    sonarr:
+        image: linuxserver/sonarr
+        container_name: sonarr
+        volumes:
+            - ${DATA}/config/sonarr:/config
+            - /etc/localtime:/etc/localtime:ro
+            - ${DATA}/TV:/tv
+            - ${DATA}/Anime:/anime
+            - ${DATA}/Downloads/complete:/downloads
+        ports:
+            - 8989:8989
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=sonarr.${HOSTNAME}
+            - VIRTUAL_PORT=8989
+        mem_limit: 1gb
+        restart: always
+
