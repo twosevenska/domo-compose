@@ -27,22 +27,6 @@ services:
         mem_limit: 2gb
         restart: always
 
-    couchpotato:
-        image: linuxserver/couchpotato:latest
-        container_name: couchpotato
-        volumes:
-            - ${DATA}/config/couchpotato:/config
-            - ${DATA}/Downloads/complete:/downloads
-            - ${DATA}/Movies:/movies
-        ports:
-            - 5050:5050
-        env_file: uidgid.env
-        environment:
-            - VIRTUAL_HOST=couchpotato.${HOSTNAME}
-            - VIRTUAL_PORT=5050
-        mem_limit: 1gb
-        restart: always
-
     radarr:
         image: linuxserver/radarr:latest
         container_name: radarr
