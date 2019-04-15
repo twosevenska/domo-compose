@@ -7,3 +7,18 @@ services:
             - ${DATA}/config/jmusicbot/config.txt:/bot/config.txt
         mem_limit: 1gb
         restart: always
+
+    jekyll:
+        image: jekyll/jekyll
+        container_name: jekyll
+        volumes:
+            - ${DATA}/www/domo/:/srv/jekyll
+        env_file: uidgid.env
+        ports:
+            - 4000:4000
+        environment:
+            - VIRTUAL_HOST=discord.${HOSTNAME}
+            - VIRTUAL_PORT=4000
+        mem_limit: 256mb
+        restart: always
+        command: jekyll serve --watch --force_polling --verbose
