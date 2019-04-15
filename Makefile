@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 CORE_FILE = docker-compose.yml
 MEDIA_FILE = docker-compose-media.yml
-DISCORD_FILE = docker-compose-jmusicbot.yml
+DISCORD_FILE = docker-compose-discord.yml
 FS_FILE = docker-compose-fs.yml
 
 .PHONY: all
