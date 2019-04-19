@@ -9,7 +9,7 @@
 * [linuxserver/muximux](https://github.com/linuxserver/docker-muximux) - Muximux
 * [emby/embyserver](https://hub.docker.com/r/emby/embyserver/) - Emby
 * [linuxserver/radarr](https://hub.docker.com/r/linuxserver/radarr) - Radarr
-* [twosevenska/jmusicbot](https://cloud.docker.com/u/twosevenska/repository/docker/twosevenska/jmusicbot)JMusicbot
+* [twosevenska/jmusicbot](https://cloud.docker.com/u/twosevenska/repository/docker/twosevenska/jmusicbot) - JMusicbot
 * [silverwind/droppy](https://github.com/silverwind/droppy) - Droppy
 
 ## Docker Setup
