@@ -7,3 +7,11 @@ services:
             - ${DATA}/config/jmusicbot/config.txt:/bot/config.txt
         mem_limit: 1gb
         restart: always
+    jsbmusicbot-backup:
+        image: twosevenska/jsbmusicbot:dev
+        container_name: jsbmusicbot-backup
+        volumes:
+            - ${DATA}/config/jsbmusicbot/options.ini:/MusicBot/config/options.ini
+            - ${DATA}/config/jsbmusicbot/permissions.ini:/MusicBot/config/permissions.ini
+        mem_limit: 1gb
+        restart: always
