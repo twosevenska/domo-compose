@@ -2,7 +2,7 @@ FROM lwieske/java-8:jdk-8u181-slim
 
 WORKDIR /bot
 
-ARG ver=0.2.7
+ARG ver=0.2.10
 
 # Add libstdc++ since we are using an alpine image
 RUN apk add --no-cache libstdc++
