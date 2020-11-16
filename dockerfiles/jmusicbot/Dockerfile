@@ -2,13 +2,13 @@ FROM lwieske/java-8:jdk-8u181-slim
 
 WORKDIR /bot
 
-ARG ver=0.2.10
+ARG ver=0.3.2
 
 # Add libstdc++ since we are using an alpine image
 RUN apk add --no-cache libstdc++
 
 # Not going to bother with making this accept any other versions for now
-RUN wget -q https://github.com/jagrosh/MusicBot/releases/download/${ver}/JMusicBot-${ver}-Linux.jar -O JMusicBot.jar
+RUN wget -q https://github.com/jagrosh/MusicBot/releases/download/${ver}/JMusicBot-${ver}.jar -O JMusicBot.jar
 
 # Add the missing libconnector.so for arm devices, again lazily doing this
 RUN mkdir -p natives/linux-arm \
