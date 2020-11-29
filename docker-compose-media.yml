@@ -34,7 +34,7 @@ services:
         restart: always
     
     radarr:
-        image: linuxserver/radarr:latest
+        image: ghcr.io/linuxserver/radarr:nightly
         container_name: radarr
         volumes:
             - ${DATA}/config/radarr:/config
@@ -50,7 +50,7 @@ services:
         restart: always    
 
     sonarr:
-        image: linuxserver/sonarr
+        image: ghcr.io/linuxserver/sonarr:preview
         container_name: sonarr
         volumes:
             - ${DATA}/config/sonarr:/config
