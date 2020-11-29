@@ -18,7 +18,7 @@ services:
             - /etc/localtime:/etc/localtime:ro
         env_file: uidgid.env
         environment:
-            - VIRTUAL_HOST=muximux.${HOSTNAME}
+            - VIRTUAL_HOST=muximux.${HOSTNAME},dashboard.${HOSTNAME}
         mem_limit: 64m
         restart: always
     watchtower:
