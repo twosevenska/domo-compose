@@ -24,7 +24,7 @@ services:
 
     homer:
         image: b4bz/homer:latest
-        container_name: muximux
+        container_name: homer
         volumes:
             - ${DATA}/config/homer:/www/assets
         env_file: uidgid.env
