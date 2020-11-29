@@ -18,9 +18,23 @@ services:
             - /etc/localtime:/etc/localtime:ro
         env_file: uidgid.env
         environment:
-            - VIRTUAL_HOST=muximux.${HOSTNAME},dashboard.${HOSTNAME}
+            - VIRTUAL_HOST=muximux.${HOSTNAME}
         mem_limit: 64m
         restart: always
+
+    homer:
+        image: b4bz/homer:latest
+        container_name: muximux
+        volumes:
+            - ${DATA}/config/homer:/www/assets
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=homer.${HOSTNAME},dashboard.${HOSTNAME}
+        ports:
+            - 8081:8080
+        mem_limit: 64m
+        restart: always
+
     watchtower:
         image: containrrr/watchtower
         container_name: watchtower
