@@ -29,6 +29,7 @@ services:
             - ${DATA}/config/homer:/www/assets
             - ${CONFIGS}/homer/config.yml:/www/assets/config.yml
             - ${CONFIGS}/homer/logos:/www/assets/logos
+            - ${CONFIGS}/homer/icons:/www/assets/icons
         env_file: uidgid.env
         environment:
             - VIRTUAL_HOST=homer.${HOSTNAME},dashboard.${HOSTNAME}
