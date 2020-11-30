@@ -27,6 +27,7 @@ services:
         container_name: homer
         volumes:
             - ${DATA}/config/homer:/www/assets
+            - ${CONFIGS}/homer/config.yml:/www/assets/config.yml
         env_file: uidgid.env
         environment:
             - VIRTUAL_HOST=homer.${HOSTNAME},dashboard.${HOSTNAME}
