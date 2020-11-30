@@ -73,7 +73,7 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - ${DATA}/TV:/tv
             - ${DATA}/Anime:/anime
-            - ${DATA}/Downloads/complete:/downloads
+            - ${DATA}/Downloads:/downloads
         ports:
             - 8989:8989
         env_file: uidgid.env
