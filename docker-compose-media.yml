@@ -60,7 +60,7 @@ services:
             - 7878:7878
         env_file: uidgid.env
         environment:
-            - VIRTUAL_HOST=radarr.${HOSTNAME}
+            - VIRTUAL_HOST=radarr.${HOSTNAME},movies.${HOSTNAME}
             - VIRTUAL_PORT=7878
         mem_limit: 1gb
         restart: always    
@@ -78,7 +78,7 @@ services:
             - 8989:8989
         env_file: uidgid.env
         environment:
-            - VIRTUAL_HOST=sonarr.${HOSTNAME}
+            - VIRTUAL_HOST=sonarr.${HOSTNAME},tv.${HOSTNAME}
             - VIRTUAL_PORT=8989
         mem_limit: 1gb
         restart: always
@@ -99,7 +99,7 @@ services:
             - 8920:8920
         env_file: uidgid.env
         environment:
-            - VIRTUAL_HOST=emby.${HOSTNAME}
+            - VIRTUAL_HOST=emby.${HOSTNAME},cinema.${HOSTNAME},miru.${HOSTNAME},watch.${HOSTNAME}
             - VIRTUAL_PORT=8096
         hostname: Emby
         mem_limit: 16gb
