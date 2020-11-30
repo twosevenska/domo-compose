@@ -54,7 +54,7 @@ services:
         container_name: radarr
         volumes:
             - ${DATA}/config/radarr:/config
-            - ${DATA}/Downloads/complete:/downloads
+            - ${DATA}/Downloads:/downloads
             - ${DATA}/Movies:/movies
         ports:
             - 7878:7878
