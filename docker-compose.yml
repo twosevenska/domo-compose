@@ -4,7 +4,25 @@ services:
         image: twosevenska/nginx-proxy:latest
         container_name: nginx-proxy
         volumes:
+            - /etc/nginx/certs
+            - /etc/nginx/vhost.d
+            - /usr/share/nginx/html
             - /var/run/docker.sock:/tmp/docker.sock:ro
+        ports:
+            - 80:80
+            - 443:443
+        mem_limit: 128m
+        restart: always
+
+    nginx-proxy-le:
+        image: jrcs/letsencrypt-nginx-proxy-companion
+        container_name: nginx-proxy-letsencrypt
+        volumes:
+            - /etc/nginx/certs
+            - /etc/nginx/vhost.d
+            - /usr/share/nginx/html
+            - /etc/acme.sh
+            - /var/run/docker.sock:/var/run/docker.sock:ro
         ports:
             - 80:80
         mem_limit: 128m
@@ -19,6 +37,7 @@ services:
         env_file: uidgid.env
         environment:
             - VIRTUAL_HOST=muximux.${HOSTNAME}
+            - LETSENCRYPT_HOST=muximux.${HOSTNAME}
         mem_limit: 64m
         restart: always
 
