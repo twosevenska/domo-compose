@@ -67,3 +67,10 @@ services:
         command: --cleanup --interval 7200
         mem_limit: 64m
         restart: always
+
+volumes:
+  conf:
+  vhost:
+  html:
+  dhparam:
+  certs:
