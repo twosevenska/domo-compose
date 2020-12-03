@@ -83,6 +83,23 @@ services:
         mem_limit: 1gb
         restart: always
 
+    lidarr:
+        image: ghcr.io/linuxserver/lidarr:nightly
+        container_name: lidarr
+        volumes:
+            - ${DATA}/config/lidarr:/config
+            - /etc/localtime:/etc/localtime:ro
+            - ${DATA}/music:/music
+            - ${DATA}/Downloads:/downloads
+        ports:
+            - 8686:8686
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=lidarr.${HOSTNAME},music.${HOSTNAME}
+            - VIRTUAL_PORT=8686
+        mem_limit: 1gb
+        restart: always
+
     emby:
         image: emby/embyserver
         container_name: emby
