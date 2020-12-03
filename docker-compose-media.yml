@@ -100,6 +100,23 @@ services:
         mem_limit: 1gb
         restart: always
 
+    bazarr:
+        image: ghcr.io/linuxserver/bazarr:latest
+        container_name: bazarr
+        volumes:
+            - ${DATA}/config/bazarr:/config
+            - /etc/localtime:/etc/localtime:ro
+            - ${DATA}/TV:/tv
+            - ${DATA}/Movies:/movies
+        ports:
+            - 6767:6767
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=bazarr.${HOSTNAME},subs.${HOSTNAME}
+            - VIRTUAL_PORT=6767
+        mem_limit: 256mb
+        restart: always
+
     emby:
         image: emby/embyserver
         container_name: emby
