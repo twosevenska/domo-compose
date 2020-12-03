@@ -2,6 +2,7 @@ SHELL := /bin/bash
 
 CORE_FILE = docker-compose.yml
 MEDIA_FILE = docker-compose-media.yml
+MEDIA_BACK_FILE = docker-compose-media-back.yml
 DISCORD_FILE = docker-compose-discord.yml
 FS_FILE = docker-compose-fs.yml
 
@@ -11,6 +12,7 @@ all: core media discord fs
 .PHONY: kill-all
 kill-all:
 	docker-compose -f $(CORE_FILE) kill
+	docker-compose -f $(MEDIA_FILE) kill
 	docker-compose -f $(MEDIA_FILE) kill
 	docker-compose -f $(DISCORD_FILE) kill
 	docker-compose -f $(FS_FILE) kill
@@ -26,6 +28,12 @@ media: clean-docker
 	docker-compose -f $(MEDIA_FILE) pull
 	docker-compose -f $(MEDIA_FILE) kill
 	docker-compose -f $(MEDIA_FILE) up -d
+
+.PHONY: media-back
+media: clean-docker
+	docker-compose -f $(MEDIA_BACK_FILE) pull
+	docker-compose -f $(MEDIA_BACK_FILE) kill
+	docker-compose -f $(MEDIA_BACK_FILE) up -d
 
 .PHONY: discord
 discord: clean-docker
