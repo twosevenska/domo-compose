@@ -14,3 +14,21 @@ services:
             - VIRTUAL_PORT=8900
         mem_limit: 1gb
         restart: always
+
+    youtube-dl:
+        image: tzahi12345/youtubedl-material
+        container_name: youtube-dl
+        volumes:
+            - ${DATA}/config/youtube-dl:/app/appdata
+            - ${DATA}/fileServer/data/youtube/audio:/audio
+            - ${DATA}/fileServer/data/youtube/video:/video
+            - ${DATA}/fileServer/data/youtube/subscriptions:/subscriptions
+            - ${CONFIGS}/youtube-dl/default.json:/app/appdata/default.json
+        env_file: uidgid.env
+        ports:
+            - 17442:17442
+        environment:
+            - VIRTUAL_HOST=youdown.${HOSTNAME}
+            - VIRTUAL_PORT=17442
+        mem_limit: 1gb
+        restart: always
