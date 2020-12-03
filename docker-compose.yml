@@ -1,7 +1,7 @@
 version: '2'
 services:
     nginx-proxy:
-        image: twosevenska/nginx-proxy:latest
+        image: jwilder/nginx-proxy:latest
         container_name: nginx-proxy
         volumes:
             - certs:/etc/nginx/certs:ro
@@ -9,6 +9,7 @@ services:
             - html:/usr/share/nginx/html
             - conf:/etc/nginx/conf.d
             - dhparam:/etc/nginx/dhparam
+            - ${CONFIGS}/nginx/custom.conf:/etc/nginx/conf.d/custom.conf
             - /var/run/docker.sock:/tmp/docker.sock:ro
         ports:
             - 80:80
