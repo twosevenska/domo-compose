@@ -13,6 +13,8 @@ services:
         ports:
             - 80:80
             - 443:443
+        environment:
+            - DHPARAM_GENERATION=false
         mem_limit: 128m
         restart: always
 
@@ -27,6 +29,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock:ro
         environment: 
             - NGINX_PROXY_CONTAINER=nginx-proxy
+            - VIRTUAL_PROTO=https
         mem_limit: 128m
         restart: always
 
