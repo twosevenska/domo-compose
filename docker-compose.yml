@@ -15,8 +15,10 @@ services:
             - 80:80
             - 443:443
         environment:
-            - DHPARAM_GENERATION=false
+            DEFAULT_HOST: domo-kun.duckdns.org
         mem_limit: 128m
+        labels:
+            com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
         restart: always
 
     nginx-proxy-le:
@@ -29,8 +31,9 @@ services:
             - certs:/etc/nginx/certs:rw
             - /var/run/docker.sock:/var/run/docker.sock:ro
         environment: 
-            - NGINX_PROXY_CONTAINER=nginx-proxy
             - VIRTUAL_PROTO=https
+        depends_on:
+            - nginx-proxy
         mem_limit: 128m
         restart: always
 
