@@ -13,7 +13,7 @@ all: core media discord fs
 kill-all:
 	docker-compose -f $(CORE_FILE) kill
 	docker-compose -f $(MEDIA_FILE) kill
-	docker-compose -f $(MEDIA_FILE) kill
+	docker-compose -f $(MEDIA_BACK_FILE) kill
 	docker-compose -f $(DISCORD_FILE) kill
 	docker-compose -f $(FS_FILE) kill
 
