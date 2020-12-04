@@ -30,7 +30,7 @@ media: clean-docker
 	docker-compose -f $(MEDIA_FILE) up -d
 
 .PHONY: media-back
-media: clean-docker
+media-back: clean-docker
 	docker-compose -f $(MEDIA_BACK_FILE) pull
 	docker-compose -f $(MEDIA_BACK_FILE) kill
 	docker-compose -f $(MEDIA_BACK_FILE) up -d
