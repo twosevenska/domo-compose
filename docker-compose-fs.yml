@@ -15,6 +15,22 @@ services:
         mem_limit: 1gb
         restart: always
 
+    filebrowser:
+        image: filebrowser/filebrowser
+        container_name: filebrowser
+        volumes:
+            - ${DATA}/config/filebrowser/database.db:/database.db
+            - ${CONFIGS}/filebrowser/.filebrowser.json:/.filebrowser.json
+            - ${DATA}/fileServer/data:/srv
+        env_file: uidgid.env
+        ports:
+            - 8901:8901
+        environment:
+            - VIRTUAL_HOST=storage2.${HOSTNAME}
+            - VIRTUAL_PORT=8901
+        mem_limit: 1gb
+        restart: always
+
     youtube-dl:
         image: tzahi12345/youtubedl-material
         container_name: youtube-dl
