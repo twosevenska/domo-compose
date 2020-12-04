@@ -7,7 +7,7 @@ DISCORD_FILE = docker-compose-discord.yml
 FS_FILE = docker-compose-fs.yml
 
 .PHONY: all
-all: core media discord fs
+all: core media media-back discord fs
 
 .PHONY: kill-all
 kill-all:
