@@ -19,7 +19,7 @@ services:
         image: filebrowser/filebrowser
         container_name: filebrowser
         volumes:
-            - ${DATA}/config/filebrowser/database.db:/database.db
+            - ${CONFIGS}/filebrowser/database.db:/database.db
             - ${CONFIGS}/filebrowser/.filebrowser.json:/.filebrowser.json
             - ${DATA}/fileServer/data:/srv
         env_file: uidgid.env
