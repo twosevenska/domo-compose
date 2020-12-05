@@ -89,7 +89,7 @@ services:
         volumes:
             - ${DATA}/config/lidarr:/config
             - /etc/localtime:/etc/localtime:ro
-            - ${DATA}/music:/music
+            - ${DATA}/Music:/music
             - ${DATA}/Downloads:/downloads
         ports:
             - 8686:8686
