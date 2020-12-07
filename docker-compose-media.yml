@@ -21,3 +21,20 @@ services:
         hostname: Emby
         mem_limit: 16gb
         restart: always
+    
+    navidrome:
+        image: deluan/navidrome:latest
+        container_name: navidrome
+        volumes:
+            - ${DATA}/config/navidrome:/data
+            - ${DATA}/Music:/music:ro
+        ports:
+            - 4533:4533
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=navidrome.${HOSTNAME},listen.${HOSTNAME}
+            - VIRTUAL_PORT=4533
+            - ND_SCANINTERVAL=1m
+            - ND_LOGLEVEL=info  
+        mem_limit: 2gb
+        restart: always
