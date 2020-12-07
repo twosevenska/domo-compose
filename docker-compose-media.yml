@@ -35,6 +35,7 @@ services:
             - VIRTUAL_HOST=navidrome.${HOSTNAME},listen.${HOSTNAME}
             - VIRTUAL_PORT=4533
             - ND_SCANINTERVAL=1m
-            - ND_LOGLEVEL=info  
+            - ND_LOGLEVEL=info
+            - ND_ENABLETRANSCODINGCONFIG=true
         mem_limit: 2gb
         restart: always
