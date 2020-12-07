@@ -23,10 +23,10 @@ services:
         restart: always
     
     navidrome:
-        image: deluan/navidrome:latest
+        image: deluan/navidrome:develop
         container_name: navidrome
         volumes:
-            - ${DATA}/config/navidrome:/data
+            - ${DATA}/config/navidrome-data:/data
             - ${DATA}/Music:/music:ro
         ports:
             - 4533:4533
