@@ -125,7 +125,7 @@ services:
             - ${DATA}/config/tdarr-data/db:/var/lib/mongodb
             - ${DATA}/config/tdarr-data/cache:/home/Tdarr/cache
             - /etc/localtime:/etc/localtime:ro
-            - ${DATA}/Movies:/home/Tdarr/Media/Movies
+            - ${DATA}/Movies:/Media/Movies
         ports:
             - 8265:8265
         env_file: uidgid.env
