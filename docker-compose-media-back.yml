@@ -117,22 +117,23 @@ services:
         mem_limit: 256mb
         restart: always
 
-    tdarr:
-        image: haveagitgat/tdarr:latest
-        container_name: tdarr
+    unmanic:
+        image: josh5/unmanic
+        container_name: unmanic
         volumes:
-            - ${DATA}/config/tdarr:/home/Tdarr/Documents/Tdarr
-            - ${DATA}/config/tdarr-data/db:/var/lib/mongodb
-            - ${DATA}/config/tdarr-data/cache:/home/Tdarr/cache
+            - ${DATA}/config/unmanic:/config
+            - ${DATA}/config/unmanic-data/cache:/tmp/unmanic
             - /etc/localtime:/etc/localtime:ro
-            - ${DATA}/Movies:/Media/Movies
+            - ${DATA}/Movies:/library/Movies
         ports:
-            - 8265:8265
+            - 8888:8888
         env_file: uidgid.env
         environment:
+            - CONFIG_DIR=/config
+            - LIBRARY_DIR=/library
             - TZ=Europe/London
-            - VIRTUAL_HOST=tdarr.${HOSTNAME},transcode.${HOSTNAME}
-            - VIRTUAL_PORT=8265
+            - VIRTUAL_HOST=unmanic.${HOSTNAME},transcode.${HOSTNAME}
+            - VIRTUAL_PORT=8888
         mem_limit: 1gb
         restart: always
         
