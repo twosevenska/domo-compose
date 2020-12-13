@@ -1,27 +1,27 @@
 version: '3'
 services:
-    sabnzbd:
-        image: linuxserver/sabnzbd:latest
-        container_name: sabnzbd
-        volumes:
-            - ${DATA}/config/sabnzbd:/config
-            - ${DATA}/Downloads/complete:/downloads
-            - ${DATA}/Downloads/incomplete:/incomplete-downloads
-        ports:
-            - 8080:8080
-        env_file: uidgid.env
-        environment:
-            - EDGE=1
-            - VIRTUAL_HOST=sabnzbd.${HOSTNAME}
-            - VIRTUAL_PORT=8080
-        mem_limit: 2gb
-        restart: always
+    # sabnzbd:
+    #     image: linuxserver/sabnzbd:latest
+    #     container_name: sabnzbd
+    #     volumes:
+    #         - ${RUNTIME}/sabnzbd:/config
+    #         - ${DATA}/Downloads/complete:/downloads
+    #         - ${DATA}/Downloads/incomplete:/incomplete-downloads
+    #     ports:
+    #         - 8080:8080
+    #     env_file: uidgid.env
+    #     environment:
+    #         - EDGE=1
+    #         - VIRTUAL_HOST=sabnzbd.${HOSTNAME}
+    #         - VIRTUAL_PORT=8080
+    #     mem_limit: 2gb
+    #     restart: always
 
     nzbget:
         image: ghcr.io/linuxserver/nzbget:latest
         container_name: nzbget
         volumes:
-            - ${DATA}/config/nzbget:/config
+            - ${CONFIG}/nzbget:/config
             - ${DATA}/Downloads:/downloads
         ports:
             - 6789:6789
@@ -37,7 +37,7 @@ services:
         image: hotio/nzbhydra2:latest
         container_name: hydra2
         volumes:
-            - ${DATA}/config/hydra2:/config
+            - ${RUNTIME}/hydra2:/config
         ports:
             - 5076:5076
         env_file: uidgid.env
@@ -53,9 +53,10 @@ services:
         image: ghcr.io/linuxserver/radarr:nightly
         container_name: radarr
         volumes:
-            - ${DATA}/config/radarr:/config
-            - ${DATA}/Downloads:/downloads
-            - ${DATA}/Movies:/movies
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/radarr:/config
+            - ${DATA}/Downloads/downloads
+            - ${RAKAU}/Movies:/movies
         ports:
             - 7878:7878
         env_file: uidgid.env
@@ -69,11 +70,11 @@ services:
         image: ghcr.io/linuxserver/sonarr:preview
         container_name: sonarr
         volumes:
-            - ${DATA}/config/sonarr:/config
             - /etc/localtime:/etc/localtime:ro
-            - ${DATA}/TV:/tv
-            - ${DATA}/Anime:/anime
-            - ${DATA}/Downloads:/downloads
+            - ${RUNTIME}/sonarr:/config
+            - ${DATA}/Downloads/downloads
+            - ${RAKAU}/TV:/tv
+            - ${RAKAU}/Anime:/anime
         ports:
             - 8989:8989
         env_file: uidgid.env
@@ -87,10 +88,10 @@ services:
         image: ghcr.io/linuxserver/lidarr:nightly
         container_name: lidarr
         volumes:
-            - ${DATA}/config/lidarr:/config
             - /etc/localtime:/etc/localtime:ro
-            - ${DATA}/Music:/music
-            - ${DATA}/Downloads:/downloads
+            - ${RUNTIME}/lidarr:/config
+            - ${DATA}/Downloads/downloads
+            - ${RAKAU}/Music:/music
         ports:
             - 8686:8686
         env_file: uidgid.env
@@ -104,10 +105,10 @@ services:
         image: ghcr.io/linuxserver/bazarr:latest
         container_name: bazarr
         volumes:
-            - ${DATA}/config/bazarr:/config
             - /etc/localtime:/etc/localtime:ro
-            - ${DATA}/TV:/tv
-            - ${DATA}/Movies:/movies
+            - ${RUNTIME}/bazarr:/config
+            - ${RAKAU}/TV:/tv
+            - ${RAKAU}/Movies:/movies
         ports:
             - 6767:6767
         env_file: uidgid.env
@@ -121,10 +122,10 @@ services:
         image: josh5/unmanic
         container_name: unmanic
         volumes:
-            - ${DATA}/config/unmanic:/config
-            - ${DATA}/config/unmanic-data/cache:/tmp/unmanic
             - /etc/localtime:/etc/localtime:ro
-            - ${DATA}/Movies:/library/Movies
+            - ${CONFIG}/unmanic:/config
+            - ${RUNTIME}/unmanic-data/cache:/tmp/unmanic
+            - ${RAKAU}/Movies:/library/Movies
         ports:
             - 8888:8888
         env_file: uidgid.env

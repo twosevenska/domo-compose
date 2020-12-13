@@ -1,32 +1,32 @@
 version: '3'
 services:
-    droppy:
-        image: silverwind/droppy
-        container_name: droppy
-        volumes:
-            - ${DATA}/config/droppy:/config
-            - ${DATA}/fileServer/data:/files
-        env_file: uidgid.env
-        ports:
-            - 8900:8989
-        environment:
-            - VIRTUAL_HOST=storage.${HOSTNAME}
-            - VIRTUAL_PORT=8900
-        mem_limit: 1gb
-        restart: always
+    # droppy:
+    #     image: silverwind/droppy
+    #     container_name: droppy
+    #     volumes:
+    #         - ${RUNTIME}/droppy:/config
+    #         - ${RAKAU}/fileServer/data:/files
+    #     env_file: uidgid.env
+    #     ports:
+    #         - 8900:8989
+    #     environment:
+    #         - VIRTUAL_HOST=storage.${HOSTNAME}
+    #         - VIRTUAL_PORT=8900
+    #     mem_limit: 1gb
+    #     restart: always
 
     filebrowser:
         image: filebrowser/filebrowser
         container_name: filebrowser
         volumes:
-            - ${CONFIGS}/filebrowser/database.db:/database.db
+            - ${RUNTIME}/filebrowser-data/database.db:/database.db
             - ${CONFIGS}/filebrowser/.filebrowser.json:/.filebrowser.json
-            - ${DATA}/fileServer/data:/srv
+            - ${RAKAU}:/rakau
         env_file: uidgid.env
         ports:
             - 8901:8901
         environment:
-            - VIRTUAL_HOST=storage2.${HOSTNAME}
+            - VIRTUAL_HOST=storage.${HOSTNAME}
             - VIRTUAL_PORT=8901
         mem_limit: 1gb
         restart: always
@@ -35,10 +35,10 @@ services:
         image: tzahi12345/youtubedl-material
         container_name: youtube-dl
         volumes:
-            - ${DATA}/config/youtube-dl:/app/appdata
-            - ${DATA}/fileServer/data/youtube/audio:/audio
-            - ${DATA}/fileServer/data/youtube/video:/video
-            - ${DATA}/fileServer/data/youtube/subscriptions:/subscriptions
+            - ${RUNTIME}/youtube-dl-data:/app/appdata
+            - ${RUNTIME}/youtube-dl-data/audio:/audio
+            - ${RUNTIME}/youtube-dl-data/video:/video
+            - ${RUNTIME}/youtube-dl-data/subscriptions:/subscriptions
             - ${CONFIGS}/youtube-dl/default.json:/app/appdata/default.json
         env_file: uidgid.env
         ports:

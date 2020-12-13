@@ -16,7 +16,7 @@ services:
         image: b4bz/homer:latest
         container_name: homer
         volumes:
-            - ${DATA}/config/homer:/www/assets
+            - ${RUNTIME}/homer:/www/assets
             - ${CONFIGS}/homer/config.yml:/www/assets/config.yml
             - ${CONFIGS}/homer/logos:/www/assets/logos
             - ${CONFIGS}/homer/icons:/www/assets/icons
