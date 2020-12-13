@@ -21,7 +21,7 @@ services:
         image: ghcr.io/linuxserver/nzbget:latest
         container_name: nzbget
         volumes:
-            - ${CONFIG}/nzbget:/config
+            - ${CONFIGS}/nzbget:/config
             - ${DATA}/Downloads:/downloads
         ports:
             - 6789:6789
@@ -123,7 +123,7 @@ services:
         container_name: unmanic
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ${CONFIG}/unmanic:/config
+            - ${CONFIGS}/unmanic:/config
             - ${RUNTIME}/unmanic-data/cache:/tmp/unmanic
             - ${RAKAU}/Movies:/library/Movies
         ports:
