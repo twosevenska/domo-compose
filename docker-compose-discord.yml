@@ -5,6 +5,7 @@ services:
         container_name: jmusicbot
         volumes:
             - ${CONFIGS}/jmusicbot/config.txt:/bot/config.txt
+            - ${CONFIGS}/jmusicbot/serversettings.json:/bot/serversettings.json
             - ${RUNTIME}/jmusicbot-data/sounds:/sounds
         mem_limit: 1gb
         restart: always
