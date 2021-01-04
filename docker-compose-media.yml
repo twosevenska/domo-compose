@@ -24,7 +24,7 @@ services:
     #     restart: always
     
     jellyfin:
-        image: linuxserver/jellyfin
+        image: ghcr.io/linuxserver/jellyfin:nightly
         container_name: jellyfin
         volumes:
             - /dev/rtc:/dev/rtc:ro
