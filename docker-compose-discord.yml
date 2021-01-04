@@ -8,6 +8,7 @@ services:
             - ${CONFIGS}/jmusicbot/serversettings.json:/bot/serversettings.json
             - ${RUNTIME}/jmusicbot-data/sounds:/sounds
         mem_limit: 1gb
+        user: ${PUID}
         restart: always
     jsbmusicbot-backup:
         image: twosevenska/jsbmusicbot:dev

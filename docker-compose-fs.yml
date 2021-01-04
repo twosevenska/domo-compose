@@ -47,4 +47,5 @@ services:
             - VIRTUAL_HOST=youdown.${HOSTNAME}
             - VIRTUAL_PORT=17442
         mem_limit: 1gb
+        user: ${PUID}
         restart: always
