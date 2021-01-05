@@ -28,7 +28,7 @@ services:
         container_name: jellyfin
         volumes:
             - /dev/rtc:/dev/rtc:ro
-            - ${RUNTIME}/emby:/config
+            - ${RUNTIME}/jellyfin:/config
             - ${RAKAU}/TV:/data/tvshows:ro
             - ${RAKAU}/Movies:/data/movies:ro
             - ${RAKAU}/Anime:/data/anime:ro
