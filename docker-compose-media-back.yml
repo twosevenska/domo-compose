@@ -74,13 +74,29 @@ services:
             - ${RUNTIME}/sonarr:/config
             - ${DATA}/Downloads:/downloads
             - ${RAKAU}/TV:/tv
-            - ${RAKAU}/Anime:/anime
         ports:
             - 8989:8989
         env_file: uidgid.env
         environment:
             - VIRTUAL_HOST=sonarr.${HOSTNAME},tv.${HOSTNAME}
             - VIRTUAL_PORT=8989
+        mem_limit: 1gb
+        restart: always
+
+    sonarr_anime:
+        image: ghcr.io/linuxserver/sonarr:preview
+        container_name: sonarr_anime
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/sonarrAnime:/config
+            - ${DATA}/Downloads:/downloads
+            - ${RAKAU}/Anime:/anime
+        ports:
+            - 8990:8989
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=sonarr-anime.${HOSTNAME},anime.${HOSTNAME}
+            - VIRTUAL_PORT=8990
         mem_limit: 1gb
         restart: always
 

@@ -22,7 +22,7 @@ services:
         hostname: Emby
         mem_limit: 16gb
         restart: always
-    
+
     navidrome:
         image: deluan/navidrome:develop
         container_name: navidrome
