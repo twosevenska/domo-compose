@@ -1,34 +1,11 @@
 version: '3'
 services:
-    # emby:
-    #     image: emby/embyserver
-    #     container_name: emby
-    #     volumes:
-    #         - /dev/rtc:/dev/rtc:ro
-    #         - ${RUNTIME}/emby:/config
-    #         - ${RAKAU}/TV:/data/tvshows:ro
-    #         - ${RAKAU}/Movies:/data/movies:ro
-    #         - ${RAKAU}/Anime:/data/anime:ro
-    #         - ${RAKAU}/Music:/data/music:ro
-    #     ports:
-    #         - 1900:1900
-    #         - 7359:7359
-    #         - 8096:8096
-    #         - 8920:8920
-    #     env_file: uidgid.env
-    #     environment:
-    #         - VIRTUAL_HOST=emby.${HOSTNAME},cinema.${HOSTNAME},miru.${HOSTNAME},watch.${HOSTNAME}
-    #         - VIRTUAL_PORT=8096
-    #     hostname: Emby
-    #     mem_limit: 16gb
-    #     restart: always
-    
-    jellyfin:
-        image: ghcr.io/linuxserver/jellyfin:nightly
-        container_name: jellyfin
+    emby:
+        image: emby/embyserver
+        container_name: emby
         volumes:
             - /dev/rtc:/dev/rtc:ro
-            - ${RUNTIME}/jellyfin:/config
+            - ${RUNTIME}/emby:/config
             - ${RAKAU}/TV:/data/tvshows:ro
             - ${RAKAU}/Movies:/data/movies:ro
             - ${RAKAU}/Anime:/data/anime:ro
@@ -40,9 +17,9 @@ services:
             - 8920:8920
         env_file: uidgid.env
         environment:
-            - VIRTUAL_HOST=jellyfin.${HOSTNAME},cinema.${HOSTNAME},miru.${HOSTNAME},watch.${HOSTNAME}
+            - VIRTUAL_HOST=emby.${HOSTNAME},cinema.${HOSTNAME},miru.${HOSTNAME},watch.${HOSTNAME}
             - VIRTUAL_PORT=8096
-        hostname: Jellyfin
+        hostname: Emby
         mem_limit: 16gb
         restart: always
 
