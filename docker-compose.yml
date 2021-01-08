@@ -34,7 +34,6 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.homer.rule= Host(`${HOSTNAME}`) || Host(`homer.${HOSTNAME}`) || Host(`dashboard.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.tls=true"
             - "traefik.http.routers.homer.entrypoints=websecure"
             - "traefik.http.routers.homer.tls.certresolver=myresolver"
         ports:
