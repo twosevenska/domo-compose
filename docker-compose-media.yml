@@ -16,10 +16,12 @@ services:
             - 8096:8096
             - 8920:8920
         env_file: uidgid.env
-        environment:
-            - VIRTUAL_HOST=emby.${HOSTNAME},cinema.${HOSTNAME},miru.${HOSTNAME},watch.${HOSTNAME}
-            - VIRTUAL_PORT=8096
-        hostname: Emby
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.emby.rule= Host(`emby.${HOSTNAME}`) || Host(`watch.${HOSTNAME}`) || Host(`miru.${HOSTNAME}`)"
+            - "traefik.http.services.emby.loadbalancer.server.port=8096"
+            - "traefik.http.routers.emby.entrypoints=websecure"
+            - "traefik.http.routers.emby.tls.certresolver=myresolver"
         mem_limit: 16gb
         restart: always
 
@@ -32,9 +34,12 @@ services:
         ports:
             - 4533:4533
         env_file: uidgid.env
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.navidrome.rule= Host(`navidrome.${HOSTNAME}`) || Host(`listen.${HOSTNAME}`)"
+            - "traefik.http.routers.navidrome.entrypoints=websecure"
+            - "traefik.http.routers.navidrome.tls.certresolver=myresolver"
         environment:
-            - VIRTUAL_HOST=navidrome.${HOSTNAME},listen.${HOSTNAME}
-            - VIRTUAL_PORT=4533
             - ND_SCANINTERVAL=1m
             - ND_LOGLEVEL=info
             - ND_ENABLETRANSCODINGCONFIG=true
