@@ -1,20 +1,5 @@
 version: '3'
 services:
-    # droppy:
-    #     image: silverwind/droppy
-    #     container_name: droppy
-    #     volumes:
-    #         - ${RUNTIME}/droppy:/config
-    #         - ${RAKAU}/fileServer/data:/files
-    #     env_file: uidgid.env
-    #     ports:
-    #         - 8900:8989
-    #     environment:
-    #         - VIRTUAL_HOST=storage.${HOSTNAME}
-    #         - VIRTUAL_PORT=8900
-    #     mem_limit: 1gb
-    #     restart: always
-
     filebrowser:
         image: filebrowser/filebrowser
         container_name: filebrowser
@@ -25,9 +10,8 @@ services:
         env_file: uidgid.env
         ports:
             - 8901:8901
-        environment:
-            - VIRTUAL_HOST=storage.${HOSTNAME}
-            - VIRTUAL_PORT=8901
+        labels:
+            - "traefik.http.routers.filebrowser.rule= Host(`storage.${HOSTNAME}`)"
         mem_limit: 1gb
         restart: always
 
@@ -43,8 +27,7 @@ services:
         env_file: uidgid.env
         ports:
             - 17442:17442
-        environment:
-            - VIRTUAL_HOST=youdown.${HOSTNAME}
-            - VIRTUAL_PORT=17442
+        labels:
+            - "traefik.http.routers.youtube-dl.rule= Host(`youdown.${HOSTNAME}`)"
         mem_limit: 1gb
         restart: always

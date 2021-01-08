@@ -1,14 +1,15 @@
 version: '3'
 services:
-    nginx-proxy:
-        image: jwilder/nginx-proxy:latest
-        container_name: nginx-proxy
+    traefik-proxy:
+        image: traefik:v2.0
+        container_name: traefik-proxy
+        command: --api.insecure=true --providers.docker
         volumes:
-            - ${CONFIGS}/nginx/custom.conf:/etc/nginx/conf.d/custom.conf
-            - /var/run/docker.sock:/tmp/docker.sock:ro
+            - /var/run/docker.sock:/var/run/docker.sock
         ports:
             - 80:80
             - 443:443
+            - 8080:8080
         mem_limit: 128m
         restart: always
 
@@ -21,8 +22,8 @@ services:
             - ${CONFIGS}/homer/logos:/www/assets/logos
             - ${CONFIGS}/homer/icons:/www/assets/icons
         env_file: uidgid.env
-        environment:
-            - VIRTUAL_HOST=homer.${HOSTNAME},dashboard.${HOSTNAME}
+        labels:
+            - "traefik.http.routers.homer.rule= Host(`homer.${HOSTNAME}`) || Host(`dashboard.${HOSTNAME}`)"
         ports:
             - 8081:8080
         mem_limit: 64m

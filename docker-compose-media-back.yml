@@ -1,22 +1,5 @@
 version: '3'
 services:
-    # sabnzbd:
-    #     image: linuxserver/sabnzbd:latest
-    #     container_name: sabnzbd
-    #     volumes:
-    #         - ${RUNTIME}/sabnzbd:/config
-    #         - ${DATA}/Downloads/complete:/downloads
-    #         - ${DATA}/Downloads/incomplete:/incomplete-downloads
-    #     ports:
-    #         - 8080:8080
-    #     env_file: uidgid.env
-    #     environment:
-    #         - EDGE=1
-    #         - VIRTUAL_HOST=sabnzbd.${HOSTNAME}
-    #         - VIRTUAL_PORT=8080
-    #     mem_limit: 2gb
-    #     restart: always
-
     nzbget:
         image: ghcr.io/linuxserver/nzbget:latest
         container_name: nzbget
@@ -26,10 +9,10 @@ services:
         ports:
             - 6789:6789
         env_file: uidgid.env
+        labels:
+            - "traefik.http.routers.nzbget.rule= Host(`nzbget.${HOSTNAME}`) || Host(`get.${HOSTNAME}`)"
         environment:
             - TZ=Europe/London
-            - VIRTUAL_HOST=nzbget.${HOSTNAME},get.${HOSTNAME}
-            - VIRTUAL_PORT=6789
         mem_limit: 2gb
         restart: always
 
@@ -41,10 +24,10 @@ services:
         ports:
             - 5076:5076
         env_file: uidgid.env
+        labels:
+            - "traefik.http.routers.hydra2.rule= Host(`hydra.${HOSTNAME}`) || Host(`search.${HOSTNAME}`)"
         environment:
             - UMASK=002
-            - VIRTUAL_HOST=hydra.${HOSTNAME},search.${HOSTNAME}
-            - VIRTUAL_PORT=5076
             - TZ="Etc/UTC"
         mem_limit: 2gb
         restart: always
@@ -60,9 +43,8 @@ services:
         ports:
             - 7878:7878
         env_file: uidgid.env
-        environment:
-            - VIRTUAL_HOST=radarr.${HOSTNAME},movies.${HOSTNAME}
-            - VIRTUAL_PORT=7878
+        labels:
+            - "traefik.http.routers.radarr.rule= Host(`radarr.${HOSTNAME}`) || Host(`movies.${HOSTNAME}`)"
         mem_limit: 1gb
         restart: always    
 
@@ -77,9 +59,8 @@ services:
         ports:
             - 8989:8989
         env_file: uidgid.env
-        environment:
-            - VIRTUAL_HOST=sonarr.${HOSTNAME},tv.${HOSTNAME}
-            - VIRTUAL_PORT=8989
+        labels:
+            - "traefik.http.routers.sonarr.rule= Host(`sonarr.${HOSTNAME}`) || Host(`tv.${HOSTNAME}`)"
         mem_limit: 1gb
         restart: always
 
@@ -94,9 +75,8 @@ services:
         ports:
             - 8990:8989
         env_file: uidgid.env
-        environment:
-            - VIRTUAL_HOST=sonarr-anime.${HOSTNAME},anime.${HOSTNAME}
-            - VIRTUAL_PORT=8990
+        labels:
+            - "traefik.http.routers.sonarr_anime.rule= Host(`sonarr-anime.${HOSTNAME}`) || Host(`anime.${HOSTNAME}`)"
         mem_limit: 1gb
         restart: always
 
@@ -111,9 +91,8 @@ services:
         ports:
             - 8686:8686
         env_file: uidgid.env
-        environment:
-            - VIRTUAL_HOST=lidarr.${HOSTNAME},music.${HOSTNAME}
-            - VIRTUAL_PORT=8686
+        labels:
+            - "traefik.http.routers.lidarr.rule= Host(`lidarr.${HOSTNAME}`) || Host(`music.${HOSTNAME}`)"
         mem_limit: 1gb
         restart: always
 
@@ -128,9 +107,8 @@ services:
         ports:
             - 6767:6767
         env_file: uidgid.env
-        environment:
-            - VIRTUAL_HOST=bazarr.${HOSTNAME},subs.${HOSTNAME}
-            - VIRTUAL_PORT=6767
+        labels:
+            - "traefik.http.routers.bazarr.rule= Host(`bazarr.${HOSTNAME}`) || Host(`subs.${HOSTNAME}`)"
         mem_limit: 256mb
         restart: always
 
@@ -145,12 +123,12 @@ services:
         ports:
             - 8888:8888
         env_file: uidgid.env
+        labels:
+            - "traefik.http.routers.unmanic.rule= Host(`unmanic.${HOSTNAME}`) || Host(`transcode.${HOSTNAME}`)"
         environment:
             - CONFIG_DIR=/config
             - LIBRARY_DIR=/library
             - TZ=Europe/London
-            - VIRTUAL_HOST=unmanic.${HOSTNAME},transcode.${HOSTNAME}
-            - VIRTUAL_PORT=8888
         mem_limit: 1gb
         cpus: 4
         restart: always
