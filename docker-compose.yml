@@ -6,6 +6,7 @@ services:
         command: 
             - "--api.insecure=true"
             - "--providers.docker"
+            - "--providers.docker.exposedByDefault=false"
             - "--entrypoints.websecure.address=:443"
             - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
             - "--certificatesresolvers.myresolver.acme.email=xoa.xazlin@gmail.com"
@@ -34,6 +35,7 @@ services:
             - ${CONFIGS}/homer/icons:/www/assets/icons
         env_file: uidgid.env
         labels:
+            - traefik.enable=true
             - "traefik.http.routers.homer.rule= Host(`${HOSTNAME}`) || Host(`homer.${HOSTNAME}`) || Host(`dashboard.${HOSTNAME}`)"
             - "traefik.http.routers.homer.entrypoints=websecure"
             - "traefik.http.routers.homer.tls.certresolver=myresolver"
