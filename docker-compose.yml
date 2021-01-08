@@ -3,9 +3,16 @@ services:
     traefik-proxy:
         image: traefik:v2.0
         container_name: traefik-proxy
-        command: --api.insecure=true --providers.docker
+        command: 
+            - "--api.insecure=true"
+            - "--providers.docker"
+            - "--entrypoints.websecure.address=:443"
+            - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+            - "--certificatesresolvers.myresolver.acme.email=xoa.xazlin@gmail.com@example.com"
+            - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
         volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
+            - "./letsencrypt:/letsencrypt"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
         ports:
             - 80:80
             - 443:443
@@ -24,6 +31,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.homer.rule= Host(`${HOSTNAME}`) || Host(`homer.${HOSTNAME}`) || Host(`dashboard.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         ports:
             - 8081:8080
         mem_limit: 64m
