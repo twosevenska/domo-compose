@@ -7,6 +7,8 @@ services:
             - ${CONFIGS}/jmusicbot/config.txt:/bot/config.txt
             - ${CONFIGS}/jmusicbot/serversettings.json:/bot/serversettings.json
             - ${RUNTIME}/jmusicbot-data/sounds:/sounds
+        labels:
+            - traefik.enable=false
         mem_limit: 1gb
         restart: always
     jsbmusicbot-backup:
@@ -15,5 +17,7 @@ services:
         volumes:
             - ${CONFIGS}/jsbmusicbot/options.ini:/MusicBot/config/options.ini
             - ${CONFIGS}/jsbmusicbot/permissions.ini:/MusicBot/config/permissions.ini
+        labels:
+            - traefik.enable=false
         mem_limit: 1gb
         restart: always
