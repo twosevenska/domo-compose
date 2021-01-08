@@ -12,6 +12,7 @@ services:
             - 8901:8901
         labels:
             - "traefik.http.routers.filebrowser.rule= Host(`storage.${HOSTNAME}`)"
+            - "traefik.http.services.emby.loadbalancer.server.port=8901"
         mem_limit: 1gb
         restart: always
 
