@@ -19,8 +19,8 @@ services:
         labels:
             - "traefik.http.routers.emby.rule= Host(`emby.${HOSTNAME}`) || Host(`watch.${HOSTNAME}`) || Host(`miru.${HOSTNAME}`)"
             - "traefik.http.services.emby.loadbalancer.server.port=8096"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.emby.entrypoints=websecure"
+            - "traefik.http.routers.emby.tls.certresolver=myresolver"
         mem_limit: 16gb
         restart: always
 
@@ -35,8 +35,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.navidrome.rule= Host(`navidrome.${HOSTNAME}`) || Host(`listen.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.navidrome.entrypoints=websecure"
+            - "traefik.http.routers.navidrome.tls.certresolver=myresolver"
         environment:
             - ND_SCANINTERVAL=1m
             - ND_LOGLEVEL=info

@@ -11,8 +11,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.nzbget.rule= Host(`nzbget.${HOSTNAME}`) || Host(`get.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.nzbget.entrypoints=websecure"
+            - "traefik.http.routers.nzbget.tls.certresolver=myresolver"
         environment:
             - TZ=Europe/London
         mem_limit: 2gb
@@ -28,8 +28,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.hydra2.rule= Host(`hydra.${HOSTNAME}`) || Host(`search.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.hydra2.entrypoints=websecure"
+            - "traefik.http.routers.hydra2.tls.certresolver=myresolver"
         environment:
             - UMASK=002
             - TZ="Etc/UTC"
@@ -49,8 +49,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.radarr.rule= Host(`radarr.${HOSTNAME}`) || Host(`movies.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.radarr.entrypoints=websecure"
+            - "traefik.http.routers.radarr.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always    
 
@@ -67,8 +67,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.sonarr.rule= Host(`sonarr.${HOSTNAME}`) || Host(`tv.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.sonarr.entrypoints=websecure"
+            - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -85,8 +85,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.sonarr_anime.rule= Host(`sonarr-anime.${HOSTNAME}`) || Host(`anime.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.sonarr_anime.entrypoints=websecure"
+            - "traefik.http.routers.sonarr_anime.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -103,8 +103,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.lidarr.rule= Host(`lidarr.${HOSTNAME}`) || Host(`music.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.lidarr.entrypoints=websecure"
+            - "traefik.http.routers.lidarr.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -121,8 +121,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.bazarr.rule= Host(`bazarr.${HOSTNAME}`) || Host(`subs.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.bazarr.entrypoints=websecure"
+            - "traefik.http.routers.bazarr.tls.certresolver=myresolver"
         mem_limit: 256mb
         restart: always
 
@@ -139,8 +139,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.unmanic.rule= Host(`unmanic.${HOSTNAME}`) || Host(`transcode.${HOSTNAME}`)"
-            - "traefik.http.routers.homer.entrypoints=websecure"
-            - "traefik.http.routers.homer.tls.certresolver=myresolver"
+            - "traefik.http.routers.unmanic.entrypoints=websecure"
+            - "traefik.http.routers.unmanic.tls.certresolver=myresolver"
         environment:
             - CONFIG_DIR=/config
             - LIBRARY_DIR=/library
