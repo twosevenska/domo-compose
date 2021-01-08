@@ -11,6 +11,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.nzbget.rule= Host(`nzbget.${HOSTNAME}`) || Host(`get.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         environment:
             - TZ=Europe/London
         mem_limit: 2gb
@@ -26,6 +28,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.hydra2.rule= Host(`hydra.${HOSTNAME}`) || Host(`search.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         environment:
             - UMASK=002
             - TZ="Etc/UTC"
@@ -45,6 +49,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.radarr.rule= Host(`radarr.${HOSTNAME}`) || Host(`movies.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always    
 
@@ -61,6 +67,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.sonarr.rule= Host(`sonarr.${HOSTNAME}`) || Host(`tv.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -77,6 +85,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.sonarr_anime.rule= Host(`sonarr-anime.${HOSTNAME}`) || Host(`anime.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -93,6 +103,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.lidarr.rule= Host(`lidarr.${HOSTNAME}`) || Host(`music.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -109,6 +121,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.bazarr.rule= Host(`bazarr.${HOSTNAME}`) || Host(`subs.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         mem_limit: 256mb
         restart: always
 
@@ -125,6 +139,8 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.unmanic.rule= Host(`unmanic.${HOSTNAME}`) || Host(`transcode.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         environment:
             - CONFIG_DIR=/config
             - LIBRARY_DIR=/library

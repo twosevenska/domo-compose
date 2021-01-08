@@ -13,6 +13,8 @@ services:
         labels:
             - "traefik.http.routers.filebrowser.rule= Host(`storage.${HOSTNAME}`)"
             - "traefik.http.services.filebrowser.loadbalancer.server.port=8901"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -30,5 +32,7 @@ services:
             - 17442:17442
         labels:
             - "traefik.http.routers.youtube-dl.rule= Host(`youdown.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
