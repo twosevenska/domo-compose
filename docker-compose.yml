@@ -6,7 +6,10 @@ services:
         command: 
             - "--api.insecure=true"
             - "--providers.docker"
+            - "--entrypoints.web.address=:80"
             - "--entrypoints.websecure.address=:443"
+            - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+            - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
             - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
             - "--certificatesresolvers.myresolver.acme.email=xoa.xazlin@gmail.com"
             - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
@@ -31,10 +34,9 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.http.routers.homer.rule= Host(`${HOSTNAME}`) || Host(`homer.${HOSTNAME}`) || Host(`dashboard.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.tls=true"
             - "traefik.http.routers.homer.entrypoints=websecure"
             - "traefik.http.routers.homer.tls.certresolver=myresolver"
-            - "traefik.http.middlewares.test-redirectscheme.redirectscheme.scheme=https"
-            - "traefik.http.middlewares.test-redirectscheme.redirectscheme.permanent=true"
         ports:
             - 8081:8080
         mem_limit: 64m
