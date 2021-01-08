@@ -1,11 +1,24 @@
 version: '3'
 services:
     traefik-proxy:
-        image: traefik:v2.0
+        image: traefik:v2.4
         container_name: traefik-proxy
-        command: --api.insecure=true --providers.docker
+        command: 
+            - "--api.insecure=true"
+            - "--log.level=WARN"
+            #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # uncomment for dev work
+            - "--providers.docker"
+            - "--providers.docker.exposedByDefault=false"
+            - "--entrypoints.web.address=:80"
+            - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+            - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+            - "--entrypoints.websecure.address=:443"
+            - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+            - "--certificatesresolvers.myresolver.acme.email=xoa.xazlin@gmail.com"
+            - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
         volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
+            - "./letsencrypt:/letsencrypt"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
         ports:
             - 80:80
             - 443:443
@@ -23,7 +36,10 @@ services:
             - ${CONFIGS}/homer/icons:/www/assets/icons
         env_file: uidgid.env
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.homer.rule= Host(`${HOSTNAME}`) || Host(`homer.${HOSTNAME}`) || Host(`dashboard.${HOSTNAME}`)"
+            - "traefik.http.routers.homer.entrypoints=websecure"
+            - "traefik.http.routers.homer.tls.certresolver=myresolver"
         ports:
             - 8081:8080
         mem_limit: 64m

@@ -10,7 +10,10 @@ services:
             - 6789:6789
         env_file: uidgid.env
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.nzbget.rule= Host(`nzbget.${HOSTNAME}`) || Host(`get.${HOSTNAME}`)"
+            - "traefik.http.routers.nzbget.entrypoints=websecure"
+            - "traefik.http.routers.nzbget.tls.certresolver=myresolver"
         environment:
             - TZ=Europe/London
         mem_limit: 2gb
@@ -25,7 +28,10 @@ services:
             - 5076:5076
         env_file: uidgid.env
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.hydra2.rule= Host(`hydra.${HOSTNAME}`) || Host(`search.${HOSTNAME}`)"
+            - "traefik.http.routers.hydra2.entrypoints=websecure"
+            - "traefik.http.routers.hydra2.tls.certresolver=myresolver"
         environment:
             - UMASK=002
             - TZ="Etc/UTC"
@@ -44,7 +50,10 @@ services:
             - 7878:7878
         env_file: uidgid.env
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.radarr.rule= Host(`radarr.${HOSTNAME}`) || Host(`movies.${HOSTNAME}`)"
+            - "traefik.http.routers.radarr.entrypoints=websecure"
+            - "traefik.http.routers.radarr.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always    
 
@@ -60,7 +69,10 @@ services:
             - 8989:8989
         env_file: uidgid.env
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.sonarr.rule= Host(`sonarr.${HOSTNAME}`) || Host(`tv.${HOSTNAME}`)"
+            - "traefik.http.routers.sonarr.entrypoints=websecure"
+            - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -76,7 +88,10 @@ services:
             - 8990:8989
         env_file: uidgid.env
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.sonarr_anime.rule= Host(`sonarr-anime.${HOSTNAME}`) || Host(`anime.${HOSTNAME}`)"
+            - "traefik.http.routers.sonarr_anime.entrypoints=websecure"
+            - "traefik.http.routers.sonarr_anime.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -92,7 +107,10 @@ services:
             - 8686:8686
         env_file: uidgid.env
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.lidarr.rule= Host(`lidarr.${HOSTNAME}`) || Host(`music.${HOSTNAME}`)"
+            - "traefik.http.routers.lidarr.entrypoints=websecure"
+            - "traefik.http.routers.lidarr.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -108,7 +126,10 @@ services:
             - 6767:6767
         env_file: uidgid.env
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.bazarr.rule= Host(`bazarr.${HOSTNAME}`) || Host(`subs.${HOSTNAME}`)"
+            - "traefik.http.routers.bazarr.entrypoints=websecure"
+            - "traefik.http.routers.bazarr.tls.certresolver=myresolver"
         mem_limit: 256mb
         restart: always
 
@@ -124,7 +145,10 @@ services:
             - 8888:8888
         env_file: uidgid.env
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.unmanic.rule= Host(`unmanic.${HOSTNAME}`) || Host(`transcode.${HOSTNAME}`)"
+            - "traefik.http.routers.unmanic.entrypoints=websecure"
+            - "traefik.http.routers.unmanic.tls.certresolver=myresolver"
         environment:
             - CONFIG_DIR=/config
             - LIBRARY_DIR=/library
