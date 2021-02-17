@@ -4,8 +4,8 @@ services:
         image: inanimate/quake2:latest
         container_name: quake2_server
         volumes:
-            - {CONFIGS}/pak0.pak:/usr/share/games/quake2/baseq2/pak0.pak
-            - {CONFIGS}/quake2/server.cfg:/usr/share/games/quake2/baseq2/server.cfg
+            - ${CONFIGS}/pak0.pak:/usr/share/games/quake2/baseq2/pak0.pak
+            - ${CONFIGS}/quake2/server.cfg:/usr/share/games/quake2/baseq2/server.cfg
         env_file: uidgid.env
         ports:
             - "27910:27910/udp"
