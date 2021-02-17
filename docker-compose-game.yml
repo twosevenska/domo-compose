@@ -1,13 +1,14 @@
 version: '3'
 services:
     quake2:
-        image: inanimate/quake2:latest
+        image: fortu/quake2-openffa
         container_name: quake2_server
         volumes:
-            - ${CONFIGS}/pak0.pak:/usr/share/games/quake2/baseq2/pak0.pak
+            #- ${CONFIGS}/pak0.pak:/usr/share/games/quake2/baseq2/pak0.pak
             - ${CONFIGS}/quake2/server.cfg:/usr/share/games/quake2/baseq2/server.cfg
         env_file: uidgid.env
         ports:
+            - "27910:27910/tcp"
             - "27910:27910/udp"
         labels:
             - "traefik.enable=true"
