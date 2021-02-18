@@ -16,8 +16,8 @@ services:
             - logs:/nquake/logs
             - media:/nquake/media
             - demos:/nquake/demos
-            - ${RUNTIME}/quake/pak0.pak:/nquake/files/id1/pak0.pak
-            - ${RUNTIME}/quake/pak1.pak:/nquake/files/id1//pak1.pak
+            - ${RUNTIME}/qupak0.pak:/nquake/files/id1/pak0.pak
+            - ${RUNTIME}/quake/pak1.pak:/nquake/files/id1/pak1.pak
         env_file: uidgid.env
         ports:
             - "27500:27500/udp"
