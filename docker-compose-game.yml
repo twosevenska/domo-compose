@@ -6,10 +6,10 @@ services:
         environment:
           - HOSTNAME=${HOSTNAME}
           - SERVER_IP=quake.${HOSTNAME} # this is your server's external ip, leave it empty to look up your external ip
-          - PORT=${KTX_SERVER_PORT} # this is the external port number for this server
-          - RCON_PASSWORD=${KTX_RCON_PASSWORD}
-          - SERVER_ADMIN=${KTX_SERVER_ADMIN}
-          - SERVER_MEMORY_KBYTES=${MVDSV_SERVER_MEMORY_BYTES} # memory allocation for server process
+          - PORT=27500 # this is the external port number for this server
+          - RCON_PASSWORD=GarbageDay
+          - SERVER_ADMIN=GamerGoose
+          - SERVER_MEMORY_KBYTES=65536 # memory allocation for server process
         volumes:
             - "/etc/timezone:/etc/timezone:ro" # This will make sure logs inside the container are in the timezone of the server
             - "/etc/localtime:/etc/localtime:ro" # This will make sure logs inside the container are in the timezone of the server
@@ -18,13 +18,13 @@ services:
             - demos:/nquake/demos
             - ${RUNTIME}/quake/pak0.pak:/nquake/files/id1/pak0.pak
             - ${RUNTIME}/quake/pak1.pak:/nquake/files/id1//pak1.pak
-        env_file: quake.env
+        env_file: uidgid.env
         ports:
-            - "${KTX_SERVER_PORT}:${KTX_SERVER_PORT}/udp"
+            - "27500:27500/udp"
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.filebrowser.rule= Host(`quake.${HOSTNAME}`)"
-            - "traefik.http.services.filebrowser.loadbalancer.server.port=${KTX_SERVER_PORT}"
+            - "traefik.http.services.filebrowser.loadbalancer.server.port=27500"
             - "traefik.http.routers.filebrowser.entrypoints=websecure"
             - "traefik.http.routers.filebrowser.tls.certresolver=myresolver"
         restart: always
