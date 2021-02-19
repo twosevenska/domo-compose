@@ -157,3 +157,20 @@ services:
         cpus: 4
         restart: always
         
+    ombi:
+        image: ghcr.io/linuxserver/ombi
+        container_name: ombi
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/ombi:/config
+        ports:
+            - 3579:3579
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.unmanic.rule= Host(`ombi.${HOSTNAME}`) || Host(`add.${HOSTNAME}`)"
+            - "traefik.http.routers.unmanic.entrypoints=websecure"
+            - "traefik.http.routers.unmanic.tls.certresolver=myresolver"
+        env_file: uidgid.env
+        mem_limit: 1gb
+        cpus: 4
+        restart: always
