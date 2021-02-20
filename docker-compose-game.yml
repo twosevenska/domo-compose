@@ -23,10 +23,10 @@ services:
             - "27500:27500/udp"
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.filebrowser.rule= Host(`quake.${HOSTNAME}`)"
-            - "traefik.http.services.filebrowser.loadbalancer.server.port=27500"
-            - "traefik.http.routers.filebrowser.entrypoints=websecure"
-            - "traefik.http.routers.filebrowser.tls.certresolver=myresolver"
+            - "traefik.http.routers.nquake.rule= Host(`quake.${HOSTNAME}`)"
+            - "traefik.http.services.nquake.loadbalancer.server.port=27500"
+            - "traefik.http.routers.nquake.entrypoints=websecure"
+            - "traefik.http.routers.nquake.tls.certresolver=myresolver"
         restart: always
     quake2:
         image: fortu/quake2-openffa
@@ -40,10 +40,10 @@ services:
             - "27910:27910/udp"
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.filebrowser.rule= Host(`quake2.${HOSTNAME}`)"
-            - "traefik.http.services.filebrowser.loadbalancer.server.port=27910"
-            - "traefik.http.routers.filebrowser.entrypoints=websecure"
-            - "traefik.http.routers.filebrowser.tls.certresolver=myresolver"
+            - "traefik.http.routers.quake2.rule= Host(`quake2.${HOSTNAME}`)"
+            - "traefik.http.services.quake2.loadbalancer.server.port=27910"
+            - "traefik.http.routers.quake2.entrypoints=websecure"
+            - "traefik.http.routers.quake2.tls.certresolver=myresolver"
         restart: always
 
 volumes:
