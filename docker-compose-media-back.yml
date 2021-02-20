@@ -167,9 +167,9 @@ services:
             - 3579:3579
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.unmanic.rule= Host(`ombi.${HOSTNAME}`) || Host(`add.${HOSTNAME}`)"
-            - "traefik.http.routers.unmanic.entrypoints=websecure"
-            - "traefik.http.routers.unmanic.tls.certresolver=myresolver"
+            - "traefik.http.routers.ombi.rule= Host(`ombi.${HOSTNAME}`) || Host(`add.${HOSTNAME}`)"
+            - "traefik.http.routers.ombi.entrypoints=websecure"
+            - "traefik.http.routers.ombi.tls.certresolver=myresolver"
         env_file: uidgid.env
         mem_limit: 1gb
         cpus: 4
