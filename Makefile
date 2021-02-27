@@ -5,15 +5,17 @@ MEDIA_FILE = docker-compose-media.yml
 MEDIA_BACK_FILE = docker-compose-media-back.yml
 DISCORD_FILE = docker-compose-discord.yml
 FS_FILE = docker-compose-fs.yml
+MUSIC_BACK_FILE = docker-compose-music-back.yml
 
 .PHONY: all
-all: core media media-back discord fs
+all: core media media-back music-back discord fs
 
 .PHONY: kill-all
 kill-all:
 	docker-compose -f $(CORE_FILE) kill
 	docker-compose -f $(MEDIA_FILE) kill
 	docker-compose -f $(MEDIA_BACK_FILE) kill
+	docker-compose -f $(MUSIC_BACK_FILE) kill
 	docker-compose -f $(DISCORD_FILE) kill
 	docker-compose -f $(FS_FILE) kill
 
@@ -34,6 +36,12 @@ media-back: clean-docker
 	docker-compose -f $(MEDIA_BACK_FILE) pull
 	docker-compose -f $(MEDIA_BACK_FILE) kill
 	docker-compose -f $(MEDIA_BACK_FILE) up -d
+
+.PHONY: music-back
+music-back: clean-docker
+	docker-compose -f $(MUSIC_BACK_FILE) pull
+	docker-compose -f $(MUSIC_BACK_FILE) kill
+	docker-compose -f $(MUSIC_BACK_FILE) up -d
 
 .PHONY: discord
 discord: clean-docker
