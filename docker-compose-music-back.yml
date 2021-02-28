@@ -7,6 +7,7 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - ${RUNTIME}/lidarr:/config
             - ${DATA}/Downloads:/downloads
+            - ${DATA}/Downloads:/downloads-amd
             - ${RAKAU}/Music:/music
         ports:
             - 8686:8686
@@ -30,5 +31,5 @@ services:
             - uidgid.env
             - ${CONFIGS}/amd/amd.env
         environment: 
-            - LidarrUrl=https://lidarr.${HOSTNAME}:8686
+            - LidarrUrl=https://lidarr.${HOSTNAME}
         restart: always
