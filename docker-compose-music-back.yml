@@ -18,3 +18,15 @@ services:
             - "traefik.http.routers.lidarr.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
+
+    amd:
+        image: randomninjaatk/amd 
+        container_name: amd
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/amd:/config
+            - ${DATA}/Downloads:/downloads-amd
+        env_file: 
+            - uidgid.env
+            - ${CONFIGS}/amd/amd.env
+        restart: always
