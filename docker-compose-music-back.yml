@@ -29,4 +29,6 @@ services:
         env_file: 
             - uidgid.env
             - ${CONFIGS}/amd/amd.env
+        environment: 
+            - LidarrUrl=https://lidarr.${HOSTNAME}:8686
         restart: always
