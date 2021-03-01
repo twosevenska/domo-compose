@@ -1,20 +1,22 @@
 version: '3'
 services:
-    readarr:
-        image: hotio/readarr:nightly
-        container_name: readarr
+    lazylibrarian:
+        image: ghcr.io/linuxserver/lazylibrarian
+        container_name: lazylibrarian
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ${RUNTIME}/readarr:/config
+            - ${RUNTIME}/lazylibrarian:/config
             - ${DATA}/Downloads:/downloads
             - ${RAKAU}/Books:/books
         ports:
-            - 8787:8787
+            - 5299:5299
         env_file: uidgid.env
+        environment:
+            - DOCKER_MODS=:linuxserver/mods:lazylibrarian-ffmpeg
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.readarr.rule= Host(`readarr.${HOSTNAME}`) || Host(`books.${HOSTNAME}`)"
-            - "traefik.http.routers.readarr.entrypoints=websecure"
-            - "traefik.http.routers.readarr.tls.certresolver=myresolver"
+            - "traefik.http.routers.lazylibrarian.rule= Host(`lazylibrarian.${HOSTNAME}`) || Host(`books.${HOSTNAME}`)"
+            - "traefik.http.routers.lazylibrarian.entrypoints=websecure"
+            - "traefik.http.routers.lazylibrarian.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
