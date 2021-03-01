@@ -38,3 +38,24 @@ services:
             - "traefik.http.routers.youtube-dl.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
+
+    webdav:
+        image: ugeek/webdav:amd64
+        container_name: webdav
+        volumes:
+            - ${RAKAU}:/media
+        env_file: uidgid.env
+        ports:
+            - 8900:80
+        env_file: 
+            - uidgid.env
+            - ${CONFIGS}/webdav/webdav.env
+        environment:
+            - TZ=Europe/London
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.youtube-dl.rule= Host(`fs.${HOSTNAME}`)"
+            - "traefik.http.routers.youtube-dl.entrypoints=websecure"
+            - "traefik.http.routers.youtube-dl.tls.certresolver=myresolver"
+        mem_limit: 1gb
+        restart: always

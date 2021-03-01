@@ -1,0 +1,35 @@
+version: '3'
+services:
+    lidarr:
+        image: ghcr.io/linuxserver/lidarr:nightly
+        container_name: lidarr
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/lidarr:/config
+            - ${DATA}/Downloads:/downloads
+            - ${DATA}/Downloads:/downloads-amd
+            - ${RAKAU}/Music:/music
+        ports:
+            - 8686:8686
+        env_file: uidgid.env
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.lidarr.rule= Host(`lidarr.${HOSTNAME}`) || Host(`music.${HOSTNAME}`)"
+            - "traefik.http.routers.lidarr.entrypoints=websecure"
+            - "traefik.http.routers.lidarr.tls.certresolver=myresolver"
+        mem_limit: 1gb
+        restart: always
+
+    amd:
+        image: randomninjaatk/amd 
+        container_name: amd
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/amd:/config
+            - ${DATA}/Downloads:/downloads-amd
+        env_file: 
+            - uidgid.env
+            - ${CONFIGS}/amd/amd.env
+        environment: 
+            - LidarrUrl=https://lidarr.${HOSTNAME}
+        restart: always
