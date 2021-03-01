@@ -13,9 +13,9 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.sonarr.rule= Host(`readarr.${HOSTNAME}`) || Host(`books.${HOSTNAME}`)"
-            - "traefik.http.routers.sonarr.entrypoints=websecure"
-            - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
+            - "traefik.http.routers.readarr.rule= Host(`readarr.${HOSTNAME}`) || Host(`books.${HOSTNAME}`)"
+            - "traefik.http.routers.readarr.entrypoints=websecure"
+            - "traefik.http.routers.readarr.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
     
@@ -32,9 +32,9 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.sonarr.rule= Host(`calibre.${HOSTNAME}`)"
-            - "traefik.http.routers.sonarr.entrypoints=websecure"
-            - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
+            - "traefik.http.routers.calibre.rule= Host(`calibre.${HOSTNAME}`)"
+            - "traefik.http.routers.calibre.entrypoints=websecure"
+            - "traefik.http.routers.calibre.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
@@ -50,9 +50,9 @@ services:
         env_file: uidgid.env
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.sonarr.rule= Host(`calibre-web.${HOSTNAME}`) || Host(`library.${HOSTNAME}`)"
-            - "traefik.http.routers.sonarr.entrypoints=websecure"
-            - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
+            - "traefik.http.routers.calibre-web.rule= Host(`calibre-web.${HOSTNAME}`) || Host(`library.${HOSTNAME}`)"
+            - "traefik.http.routers.calibre-web.entrypoints=websecure"
+            - "traefik.http.routers.calibre-web.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
 
