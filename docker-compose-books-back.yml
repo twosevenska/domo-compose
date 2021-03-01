@@ -1,0 +1,58 @@
+version: '3'
+services:
+    readarr:
+        image: hotio/readarr
+        container_name: readarr
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/readarr:/config
+            - ${DATA}/Downloads:/downloads
+            - ${RAKAU}/Books:/books
+        ports:
+            - 8787:8787
+        env_file: uidgid.env
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.sonarr.rule= Host(`readarr.${HOSTNAME}`) || Host(`books.${HOSTNAME}`)"
+            - "traefik.http.routers.sonarr.entrypoints=websecure"
+            - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
+        mem_limit: 1gb
+        restart: always
+    
+    calibre:
+        image: ghcr.io/linuxserver/calibre
+        container_name: calibre
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/calibre:/config
+            - ${RAKAU}/Books:/library
+        ports:
+            - 8788:8080
+            - 8789:8081
+        env_file: uidgid.env
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.sonarr.rule= Host(`calibre.${HOSTNAME}`)"
+            - "traefik.http.routers.sonarr.entrypoints=websecure"
+            - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
+        mem_limit: 1gb
+        restart: always
+
+    calibre-web:
+        image: ghcr.io/linuxserver/calibre-web
+        container_name: calibre-web
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/calibre-web:/config
+            - ${RAKAU}/Books:/books
+        ports:
+            - 8083:8080
+        env_file: uidgid.env
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.sonarr.rule= Host(`calibre-web.${HOSTNAME}`) || Host(`library.${HOSTNAME}`)"
+            - "traefik.http.routers.sonarr.entrypoints=websecure"
+            - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
+        mem_limit: 1gb
+        restart: always
+
