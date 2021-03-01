@@ -1,7 +1,7 @@
 version: '3'
 services:
     readarr:
-        image: hotio/readarr
+        image: hotio/readarr:nightly
         container_name: readarr
         volumes:
             - /etc/localtime:/etc/localtime:ro
