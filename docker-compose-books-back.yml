@@ -12,7 +12,7 @@ services:
             - 5299:5299
         env_file: uidgid.env
         environment:
-            - DOCKER_MODS=:linuxserver/mods:lazylibrarian-ffmpeg
+            - DOCKER_MODS=linuxserver/mods:lazylibrarian-ffmpeg
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.lazylibrarian.rule= Host(`lazylibrarian.${HOSTNAME}`) || Host(`books.${HOSTNAME}`)"
