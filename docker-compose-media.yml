@@ -10,7 +10,6 @@ services:
             - ${RAKAU}/Movies:/data/movies:ro
             - ${RAKAU}/Anime:/data/anime:ro
             - ${RAKAU}/Music:/data/music:ro
-            - ${RAKAU}/Books:/data/books:ro
         ports:
             - 1900:1900
             - 7359:7359

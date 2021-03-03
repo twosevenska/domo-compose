@@ -54,8 +54,32 @@ services:
             - TZ=Europe/London
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.youtube-dl.rule= Host(`fs.${HOSTNAME}`)"
-            - "traefik.http.routers.youtube-dl.entrypoints=websecure"
-            - "traefik.http.routers.youtube-dl.tls.certresolver=myresolver"
+            - "traefik.http.routers.webdav.rule= Host(`fs.${HOSTNAME}`)"
+            - "traefik.http.routers.webdav.entrypoints=websecure"
+            - "traefik.http.routers.webdav.tls.certresolver=myresolver"
+        mem_limit: 1gb
+        restart: always
+
+    resilio-sync:
+        image: ghcr.io/linuxserver/resilio-sync
+        container_name: resilio-sync
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - ${RUNTIME}/resilio-sync:/config
+            - ${RUNTIME}/resilio-sync-data:/downloads
+            - ${RAKAU}/Books/audiobooks:/sync
+        env_file: uidgid.env
+        ports:
+            - 8901:8888
+            - 55555:55555
+        env_file: 
+            - uidgid.env
+        environment:
+            - TZ=Europe/London
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.resilio-sync.rule= Host(`cloud.${HOSTNAME}`)"
+            - "traefik.http.routers.resilio-sync.entrypoints=websecure"
+            - "traefik.http.routers.resilio-sync.tls.certresolver=myresolver"
         mem_limit: 1gb
         restart: always
