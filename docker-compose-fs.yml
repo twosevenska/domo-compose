@@ -67,7 +67,7 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - ${RUNTIME}/resilio-sync:/config
             - ${RUNTIME}/resilio-sync-data:/downloads
-            - ${RAKAU}/Books/audiobooks:/sync
+            - ${RAKAU}/Books:/sync
         env_file: uidgid.env
         ports:
             - 8902:8888
